@@ -6,3 +6,4 @@ gem "sinatra"
 gem "webrick"
 gem "rackup"
 gem "puma"
+gem 'sinatra-contrib'
