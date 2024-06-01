@@ -1,12 +1,28 @@
 require 'sinatra'
 require 'sinatra/reloader'
 
+before do
+  @author = "yokomaru"
+end
+
+after do
+  logger.info "page displayed"
+end
+
+helpers do
+  def  strong(a)
+   "<strong>#{a}</strong>"
+  end
+end
+
 get '/' do
-  'トップページ'
+  @title = "index"
+  @content = "index #{strong(@author)}"
+  erb :index
 end
 
 get '/memos' do
-  'メモ一覧ページ'
+  redirect '/'
 end
 
 get '/memos/new' do
