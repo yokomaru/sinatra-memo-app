@@ -1,0 +1,15 @@
+
+<div>
+    <%= @memo.title %>
+</div>
+<div>
+    <%= @memo.content %>
+</div>
+<form method="get" action="/memos/<%= @memo.id %>/edit">
+    <input type="submit" value="変更">
+</form>
+<form action="/memos/<%= @memo.id %>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type= "submit" value="削除">
+</form>
+<a href="/">戻る</a>

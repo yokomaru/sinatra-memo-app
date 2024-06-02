@@ -1,1 +1,10 @@
-<div><%= @content %></div>
+<form method="get" action="/memos/new">
+  <button type="submit" >追加</button>
+</form>
+<ul>
+    <% @memos.each do |memo| %>
+      <li data-id= "<%= memo.id %>">
+        <a href="/memos/<%= memo.id %>"><%= memo.content %></a>
+      </li>
+    <% end %>
+</ul>
