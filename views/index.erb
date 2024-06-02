@@ -3,8 +3,8 @@
 </form>
 <ul>
     <% @memos.each do |memo| %>
-      <li data-id= "<%= memo.id %>">
-        <a href="/memos/<%= memo.id %>"><%= memo.content %></a>
+      <li data-id= "<%= memo['id'] %>">
+        <a href="/memos/<%= memo['id'] %>"><%= memo["content"] %></a>
       </li>
     <% end %>
 </ul>

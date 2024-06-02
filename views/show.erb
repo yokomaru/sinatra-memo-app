@@ -1,15 +1,17 @@
 
 <div>
-    <%= @memo.title %>
+    <%= @memo['title'] %>
 </div>
 <div>
-    <%= @memo.content %>
+    <%= @memo['content'] %>
 </div>
-<form method="get" action="/memos/<%= @memo.id %>/edit">
+<div>
+<form method="get" action="/memos/<%= @memo['id'] %>/edit">
     <input type="submit" value="変更">
 </form>
-<form action="/memos/<%= @memo.id %>" method="post">
+<form action="/memos/<%= @memo['id'] %>" method="post">
     <input id="hidden" type="hidden" name="_method" value="delete">
     <input type= "submit" value="削除">
 </form>
+</div>
 <a href="/">戻る</a>
