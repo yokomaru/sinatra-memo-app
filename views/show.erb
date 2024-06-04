@@ -1,17 +1,22 @@
-
-<div>
-    <%= @memo['title'] %>
-</div>
-<div>
-    <%= @memo['content'] %>
-</div>
-<div>
-<form method="get" action="/memos/<%= @memo['id'] %>/edit">
-    <input type="submit" value="変更">
-</form>
-<form action="/memos/<%= @memo['id'] %>" method="post">
-    <input id="hidden" type="hidden" name="_method" value="delete">
-    <input type= "submit" value="削除">
-</form>
-</div>
-<a href="/">戻る</a>
+<section>
+    <div class="memo">
+        <h2><%= @memo['title'] %></h2>
+        <p><%= @memo['content'].gsub(/\n/, '<br/>') %></p>
+    </div>
+    <div class="show_buttons">
+        <div class="show_buttons__button">
+            <form method="get" action="/memos/<%= @memo['id'] %>/edit">
+                <input type="submit" value="変更">
+            </form>
+        </div>
+        <div class="show_buttons__button">
+            <form action="/memos/<%= @memo['id'] %>" method="post">
+                <input id="hidden" type="hidden" name="_method" value="delete">
+                <input type= "submit" value="削除">
+            </form>
+        </div>
+    </div>
+    <div class="form-return">
+        <a href="/">戻る</a>
+    </div>
+</section>

@@ -1,10 +1,19 @@
-<form method="get" action="/memos/new">
-  <button type="submit" >追加</button>
-</form>
-<ul>
+<section >
+  <form method="get" action="/memos/new">
+    <div class="form-items">
+      <div class="form-action">
+        <input type="submit" value="追加">
+      </div>
+    </div>
+  </form>
+  <ul>
     <% @memos.each do |memo| %>
-      <li data-id= "<%= memo['id'] %>">
-        <a href="/memos/<%= memo['id'] %>"><%= memo["content"] %></a>
+      <li data-id= "<%= memo['id'] %>" class="news_list_item">
+        <a href="/memos/<%= memo['id'] %>">
+          <p><%= memo["title"] %></p>
+          <span class="arrow"></span>
+        </a>
       </li>
     <% end %>
-</ul>
+  </ul>
+</section>
