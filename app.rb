@@ -36,12 +36,14 @@ end
 get '/memos/:id' do |id|
   @memos = Memo.all
   @memo = Memo.find_by_id(@memos, id)
+  redirect to not_found if @memo.nil?
 	erb :show
 end
 
 get '/memos/:id/edit' do |id|
   @memos = Memo.all
   @memo = Memo.find_by_id(@memos, id)
+  redirect to not_found if @memo.nil?
 	erb :edit
 end
 
@@ -64,4 +66,9 @@ delete '/memos/:id' do |id|
   Memo.destroy(@memos, id)
   Memo.save(@memos)
   redirect '/'
+end
+
+not_found do
+  status 404
+	erb :not_found
 end
