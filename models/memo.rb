@@ -2,7 +2,7 @@ require 'json'
 
 class Memo
   def self.all
-    File.open('public/memos.json') { |file| JSON.load(file) } || []
+    File.open('public/memo.json') { |file| JSON.load(file) } || []
   end
 
   def self.find_by_id(memos, id)
@@ -10,7 +10,7 @@ class Memo
   end
 
   def self.save(memos)
-    File.open('public/memos.json', 'w') do |file|
+    File.open('public/memo.json', 'w') do |file|
       str = JSON.dump(memos, file)
     end
   end
