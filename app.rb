@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sinatra'
 require 'sinatra/reloader'
 require_relative 'models/memo'
@@ -26,7 +28,7 @@ end
 post '/memos' do
   @memos = Memo.all
   max_id = Memo.fetch_max_id(@memos)
-  hash = {"id": max_id.to_s, "title": h(params[:title]), "content": h(params[:content])}
+  hash = {'id': max_id.to_s, 'title': h(params[:title]), 'content': h(params[:content]) }
   @memos.push(hash)
   Memo.save(@memos)
   redirect "/memos/#{max_id}"
@@ -36,21 +38,21 @@ get '/memos/:id' do |id|
   @memos = Memo.all
   @memo = Memo.find_by_id(@memos, id)
   redirect to not_found if @memo.nil?
-	erb :show
+  erb :show
 end
 
 get '/memos/:id/edit' do |id|
   @memos = Memo.all
   @memo = Memo.find_by_id(@memos, id)
   redirect to not_found if @memo.nil?
-	erb :edit
+  erb :edit
 end
 
 patch '/memos/:id' do |id|
   @memos = Memo.all
   @memo = Memo.find_by_id(@memos, id)
   @memos.find do |memo|
-    if memo["id"].include?(id)
+    if memo['id'].include?(id)
       memo['title'] = h(params[:title])
       memo['content'] = h(params[:content])
     end
@@ -69,5 +71,5 @@ end
 
 not_found do
   status 404
-	erb :not_found
+  erb :not_found
 end
