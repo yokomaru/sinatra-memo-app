@@ -3,8 +3,14 @@
 require 'json'
 
 class Memo
+  FILE_PATH = 'public/memo.json'
+
   def self.all
-    File.open('public/memo.json') { |file| JSON.parse(file.read) } || []
+    File.open(FILE_PATH, 'r') do |file|
+      JSON.parse(file.read)
+    rescue StandardError
+      []
+    end
   end
 
   def self.find_by_id(memos, id)
@@ -12,7 +18,7 @@ class Memo
   end
 
   def self.save(memos)
-    File.open('public/memo.json', 'w') do |file|
+    File.open(FILE_PATH, 'w') do |file|
       JSON.dump(memos, file)
     end
   end
