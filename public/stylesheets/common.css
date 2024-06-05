@@ -181,7 +181,7 @@ textarea {
 }
 
 textarea {
-  height: 6em;
+  height:20em;
 }
 
 input[type="submit"] {
@@ -205,6 +205,7 @@ input[type="submit"] {
 }
 
 .form-items__item {
+  display: flex;
   margin-bottom: 16px;
 }
 
@@ -219,10 +220,6 @@ input[type="submit"] {
 
 .memo {
   min-height: 300px;
-}
-
-.content {
-  height:200px
 }
 
 .header-title a{

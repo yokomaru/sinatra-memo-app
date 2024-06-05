@@ -1,18 +1,18 @@
 <section >
   <form action="/memos/<%= @memo['id'] %>" method="post">
-    <div class="form-items">
     <input id="hidden" type="hidden" name="_method" value="patch">
-    <div class="form-items__item">
-      <label for="title">件名</label>
-      <input type="text" name="title" value="<%= @memo['title'] %>">
-    </div>
-    <div class="form-items__item">
-      <label for="content">内容</label>
-      <textarea id="content" name="content" class="content"><%= @memo['content'] %></textarea>
-    </div>
-    <div class="form-action">
-      <input type= "submit" value="更新">
-    </div>
+    <div class="form-items">
+      <div class="form-items__item">
+        <label for="title">件名</label>
+        <input type="text" name="title" value="<%= @memo['title'] %>">
+      </div>
+      <div class="form-items__item">
+        <label for="content">内容</label>
+        <textarea id="content" name="content ><%= @memo['content'] %></textarea>
+      </div>
+      <div class="form-action">
+        <input type= "submit" value="保存">
+      </div>
   </form>
   <div class="form-return">
     <a href="/memos/<%= @memo['id'] %>">戻る</a>
