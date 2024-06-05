@@ -14,32 +14,32 @@
 
 ## Getting Started
 
-1. ターミナルにてカレントワーキングディレクトリを、ディレクトリをクローンしたい場所に変更します。
+1. ターミナルにてカレントディレクトリをクローンしたい場所に変更します。
 
 ```shell
 $ cd your-workspace
 ```
 
-2. git clone を入力し、作成された`sinatra-memo-app`ディレクトリをカレントワーキングディレクトリを移してください。
+1. `git clone` を入力し、作成された`sinatra-memo-app`ディレクトリをカレントディレクトリにしてください。
 
 ```shell
 $ git clone https://github.com/yokomaru/sinatra-memo-app.git
 $ cd sinatra-memo-app
 ```
 
-3.bundle installを実行してください
+3. `bundle install`を実行してください。
 
 ```shell
 $ bundle install
 ```
 
-4. MemoAppを立ち上げてください
+4. MemoAppを立ち上げてください。
 
 ```shell
 $ bundle exec ruby app.rb
 ```
 
-5. `http://localhost:4567` にアクセスしてください
+5. `http://localhost:4567` にアクセスしてください。
 
 ## Usage
 ### 一覧
