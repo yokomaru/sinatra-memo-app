@@ -1,4 +1,4 @@
-<section >
+<section>
   <form method="get" action="/memos/new">
     <div class="form-items">
       <div class="form-action">
@@ -8,7 +8,7 @@
   </form>
   <ul>
     <% @memos.each do |memo| %>
-      <li data-id= "<%= memo['id'] %>" class="news_list_item">
+      <li data-id="<%= memo['id'] %>" class="news_list_item">
         <a href="/memos/<%= memo['id'] %>">
           <p><%= memo["title"] %></p>
           <span class="arrow"></span>
