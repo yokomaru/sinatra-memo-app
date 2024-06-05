@@ -28,7 +28,7 @@ end
 post '/memos' do
   @memos = Memo.all
   max_id = Memo.fetch_max_id(@memos)
-  hash = {'id': max_id.to_s, 'title': h(params[:title]), 'content': h(params[:content]) }
+  hash = { 'id': max_id.to_s, 'title': h(params[:title]), 'content': h(params[:content]) }
   @memos.push(hash)
   Memo.save(@memos)
   redirect "/memos/#{max_id}"
