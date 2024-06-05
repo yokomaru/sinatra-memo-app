@@ -1,6 +1,6 @@
-# Welcome to Memo App
+# Welcome to メモアプリ
 
-## What's Memo App?
+## What's メモアプリ?
 - FBCの**Sinatra を使ってWebアプリケーションの基本を理解する**課題で作成したメモアプリです。
 
 ## Demo
@@ -10,7 +10,7 @@
 - メモの作成・更新・削除・一覧・閲覧機能を実装しています。
 
 ## Feature
-- 存在しないid、ページにアクセスすると404エラーが表示されます。
+- 存在しないid、ページにアクセスすると404エラーを表示します。
 
 ## Getting Started
 
@@ -20,7 +20,7 @@
 $ cd your-workspace
 ```
 
-1. `git clone` を入力し、作成された`sinatra-memo-app`ディレクトリをカレントディレクトリにしてください。
+2. `git clone` を入力し、作成された`sinatra-memo-app`ディレクトリをカレントディレクトリにしてください。
 
 ```shell
 $ git clone https://github.com/yokomaru/sinatra-memo-app.git
@@ -33,7 +33,7 @@ $ cd sinatra-memo-app
 $ bundle install
 ```
 
-4. MemoAppを立ち上げてください。
+4. メモアプリを立ち上げてください。
 
 ```shell
 $ bundle exec ruby app.rb
