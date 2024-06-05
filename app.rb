@@ -1,6 +1,6 @@
 require 'sinatra'
 require 'sinatra/reloader'
-require './models/memos'
+require_relative 'models/memo'
 
 enable :method_override
 
@@ -27,8 +27,7 @@ post '/memos' do
   @memos = Memo.all
   max_id = Memo.fetch_max_id(@memos)
   hash = {"id": max_id.to_s, "title": h(params[:title]), "content": h(params[:content])}
-  # 破壊的なのでdupする
-  @memos.push(hash.dup)
+  @memos.push(hash)
   Memo.save(@memos)
   redirect "/memos/#{max_id}"
 end
