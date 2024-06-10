@@ -3,7 +3,7 @@
 require 'json'
 
 class Memo
-  FILE_PATH = 'public/memo.json'
+  FILE_PATH = 'db/memo.json'
 
   def self.all
     File.open(FILE_PATH, 'r') do |file|
