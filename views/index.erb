@@ -8,7 +8,7 @@
   </form>
   <ul>
     <% @memos.each do |memo| %>
-      <li data-id="<%= h(memo['id') %>" class="news_list_item">
+      <li data-id="<%= h(memo['id']) %>" class="news_list_item">
         <a href="/memos/<%= h(memo['id']) %>">
           <p><%= h(memo["title"]) %></p>
           <span class="arrow"></span>
