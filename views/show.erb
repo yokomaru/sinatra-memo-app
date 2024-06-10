@@ -1,16 +1,16 @@
 <section>
   <div class="memo">
-    <h2><%= @memo['title'] %></h2>
-    <p><%= @memo['content'].gsub(/\n/, '<br/>') %></p>
+    <h2><%= h(@memo['title']) %></h2>
+    <p><%= h(@memo['content']).gsub(/\n/, '<br/>') %></p>
   </div>
   <div class="show_buttons">
     <div class="show_buttons__button">
-      <form method="get" action="/memos/<%= @memo['id'] %>/edit">
+      <form method="get" action="/memos/<%= h(@memo['id']) %>/edit">
         <input type="submit" value="編集">
       </form>
     </div>
     <div class="show_buttons__button">
-      <form action="/memos/<%= @memo['id'] %>" method="post">
+      <form action="/memos/<%= h(@memo['id']) %>" method="post">
         <input id="hidden" type="hidden" name="_method" value="delete">
         <input type="submit" value="削除">
       </form>

@@ -28,7 +28,7 @@ end
 post '/memos' do
   @memos = Memo.all
   max_id = Memo.fetch_max_id(@memos)
-  hash = { 'id': max_id.to_s, 'title': h(params[:title]), 'content': h(params[:content]) }
+  hash = { 'id': max_id.to_s, 'title': params[:title], 'content': params[:content] }
   @memos.push(hash)
   Memo.save(@memos)
   redirect "/memos/#{max_id}"
@@ -53,8 +53,8 @@ patch '/memos/:id' do |id|
   @memo = Memo.find_by_id(@memos, id)
   @memos.find do |memo|
     if memo['id'].include?(id)
-      memo['title'] = h(params[:title])
-      memo['content'] = h(params[:content])
+      memo['title'] = params[:title]
+      memo['content'] = params[:content]
     end
   end
   Memo.save(@memos)
