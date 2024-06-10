@@ -27,6 +27,7 @@ class Memo
     memos.find.with_index do |memo, i|
       memos.delete_at(i) if memo['id'].include?(id)
     end
+    Memo.save(memos)
   end
 
   def self.fetch_max_id(memos)
