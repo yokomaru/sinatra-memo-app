@@ -4,7 +4,7 @@
 - FBCの**Sinatra を使ってWebアプリケーションの基本を理解する**課題で作成したメモアプリです。
 
 ## Demo
-![Demo](https://github.com/yokomaru/sinatra-memo-app/assets/44030266/745971b2-934c-4d29-b83f-5d996963bc75)
+![MemoAppDemo_2024061102](https://github.com/yokomaru/sinatra-memo-app/assets/44030266/27d8050b-dfdc-4951-9c71-2fd2e11e39ea)
 
 ## Description
 - メモの作成・更新・削除・一覧・閲覧機能を実装しています。
