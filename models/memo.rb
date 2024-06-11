@@ -8,11 +8,7 @@ class Memo
   def self.all
     File.open(FILE_PATH, 'r') do |file|
       content = file.read
-      if content.empty?
-        []
-      else
-        JSON.parse(content)
-      end
+      content.empty? ? [] : JSON.parse(content)
     end
   end
 
