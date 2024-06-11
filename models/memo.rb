@@ -57,4 +57,12 @@ class Memo
   def self.fetch_max_id(memos)
     memos.empty? ? 1 : memos.map { |memo| memo['id'].to_i }.max + 1
   end
+
+  def self.create_db
+    return if File.exist?(FILE_PATH)
+
+    File.open(FILE_PATH, 'w') do |file|
+      JSON.dump([], file)
+    end
+  end
 end

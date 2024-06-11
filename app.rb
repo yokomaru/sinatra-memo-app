@@ -76,3 +76,5 @@ not_found do
   status 404
   erb :not_found
 end
+
+Memo.create_db if $PROGRAM_NAME == __FILE__
