@@ -26,51 +26,46 @@ get '/memos/new' do
 end
 
 post '/memos' do
-  @memos = Memo.all
-  max_id = Memo.fetch_max_id(@memos)
-  memo = { 'id': max_id.to_s, 'title': params[:title], 'content': params[:content] }
-  add_memos = @memos
-  add_memos.push(memo)
-  if Memo.save(add_memos)
-    redirect "/memos/#{max_id}"
+  if Memo.create(params)
+    redirect '/'
   else
     erb :new
   end
 end
 
 get '/memos/:id' do |id|
-  @memos = Memo.all
-  @memo = Memo.find_by_id(@memos, id)
-  redirect to not_found if @memo.nil?
-  erb :show
+  @memo = Memo.find_by_id(id)
+  if @memo.nil?
+    redirect to not_found
+  else
+    erb :show
+  end
 end
 
 get '/memos/:id/edit' do |id|
-  @memos = Memo.all
-  @memo = Memo.find_by_id(@memos, id)
-  redirect to not_found if @memo.nil?
-  erb :edit
+  @memo = Memo.find_by_id(id)
+  if @memo.nil?
+    redirect to not_found
+  else
+    erb :edit
+  end
 end
 
 patch '/memos/:id' do |id|
-  @memos = Memo.all
-  @memos.find do |memo|
-    if memo['id'].include?(id)
-      memo['title'] = params[:title]
-      memo['content'] = params[:content]
-    end
-  end
-  if Memo.save(@memos)
-    redirect "/memos/#{params[:id]}"
+  memo = Memo.find_by_id(id)
+
+  redirect to not_found if memo.nil?
+  if Memo.update(params)
+    redirect "/memos/#{id}"
   else
     erb :edit
   end
 end
 
 delete '/memos/:id' do |id|
-  @memos = Memo.all
-  @memo = Memo.find_by_id(@memos, id)
-  if Memo.destroy(@memos, id)
+  memo = Memo.find_by_id(id)
+  redirect to not_found if memo.nil?
+  if Memo.destroy(id)
     redirect '/'
   else
     erb :show
