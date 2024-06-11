@@ -16,8 +16,9 @@ class Memo
     end
   end
 
-  def self.find_by_id(memos, id)
-    memos.find { |x| x['id'].include?(id) }
+  def self.find_by_id(id)
+    memos = Memo.all
+    memos.find { |x| x['id'] == id }
   end
 
   def self.save(memos)
@@ -26,9 +27,29 @@ class Memo
     end
   end
 
-  def self.destroy(memos, id)
+  def self.create(params)
+    memos = Memo.all
+    max_id = Memo.fetch_max_id(memos)
+    memo = { 'id': max_id.to_s, 'title': params[:title], 'content': params[:content] }
+    memos.push(memo)
+    Memo.save(memos)
+  end
+
+  def self.update(params)
+    memos = Memo.all
+    memos.find do |memo|
+      if memo['id'] == params[:id]
+        memo['title'] = params[:title]
+        memo['content'] = params[:content]
+      end
+    end
+    Memo.save(memos)
+  end
+
+  def self.destroy(id)
+    memos = Memo.all
     memos.find.with_index do |memo, i|
-      memos.delete_at(i) if memo['id'].include?(id)
+      memos.delete_at(i) if memo['id'] == id
     end
     Memo.save(memos)
   end
