@@ -7,9 +7,12 @@ class Memo
 
   def self.all
     File.open(FILE_PATH, 'r') do |file|
-      JSON.parse(file.read)
-    rescue StandardError
-      []
+      content = file.read
+      if content.empty?
+        []
+      else
+        JSON.parse(content)
+      end
     end
   end
 
