@@ -1,0 +1,21 @@
+<section>
+  <form action="/memos/<%= @memo['id'] %>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+    <div class="form-items">
+      <div class="form-items__item">
+        <label for="title">件名</label>
+        <input type="text" name="title" value="<%= h(@memo['title']) %>">
+      </div>
+      <div class="form-items__item">
+        <label for="content">内容</label>
+        <textarea id="content" name="content"><%= h(@memo['content']) %></textarea>
+      </div>
+      <div class="form-action">
+        <input type="submit" value="保存">
+      </div>
+    </div>
+  </form>
+  <div class="form-return">
+    <a href="/memos/<%= h(@memo['id']) %> ">戻る</a>
+  </div>
+</section>
