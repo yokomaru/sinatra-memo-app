@@ -26,8 +26,7 @@ class Memo
   def self.create(params)
     memos = Memo.all
     max_id = Memo.fetch_max_id(memos)
-    memo = { 'id': max_id.to_s, 'title': params[:title], 'content': params[:content] }
-    memos.push(memo)
+    memos << { 'id': max_id.to_s, 'title': params[:title], 'content': params[:content] }
     Memo.save(memos)
   end
 
