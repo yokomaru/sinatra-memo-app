@@ -15,14 +15,14 @@ class Memo
 
   def self.find_by_id(id)
     conn = set_connect
-    memo = conn.exec("SELECT * FROM memos where id = #{id}").to_a
+    memo = conn.exec_params("SELECT * FROM memos where id = $1", [id]).to_a
     memo[0]
   end
 
   def self.create(params)
     begin
       conn = set_connect
-      conn.exec("INSERT INTO memos (title, content) VALUES ('#{params[:title]}', '#{params[:content]}')")
+      conn.exec_params("INSERT INTO memos (title, content) VALUES ($1, $2)", [params[:content], params[:title]])
       conn.close
       true
     rescue PG::Error => err
@@ -34,7 +34,7 @@ class Memo
   def self.update(params)
     begin
       conn = set_connect
-      conn.exec("UPDATE memos SET title = '#{params[:title]}', content = '#{params[:content]}' where id = #{params[:id]}")
+      conn.exec("UPDATE memos SET title = $1, content = $2 where id = $3", [params[:title], params[:content], params[:id]])
       conn.close
       true
     rescue PG::Error => err
@@ -46,7 +46,7 @@ class Memo
   def self.destroy(id)
     begin
       conn = set_connect
-      conn.exec("DELETE FROM memos where id = #{id}")
+      conn.exec_params("DELETE FROM memos where id = $1", [id])
       conn.close
       true
     rescue PG::Error => err
