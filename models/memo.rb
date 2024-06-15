@@ -8,7 +8,7 @@ class Memo
 
   def self.all
     conn = set_connect
-    results = conn.exec("SELECT * FROM meos")
+    results = conn.exec("SELECT * FROM memos")
     conn.close
     results
   end
@@ -19,9 +19,7 @@ class Memo
     memo[0]
   end
 
-
   def self.create(params)
-
     conn = set_connect
     conn.exec("INSERT INTO memos (title, content) VALUES ('#{params[:title]}', '#{params[:content]}')")
     results = conn.exec("select * from memos")
@@ -30,16 +28,16 @@ class Memo
   end
 
   def self.update(params)
-
     conn = set_connect
     conn.exec("UPDATE memos SET title = '#{params[:title]}', content = '#{params[:content]}'  where id = #{params[:id]}")
     results = conn.exec("select * from memos")
     conn.close
     true
   end
+
   def self.destroy(id)
     conn = set_connect
-    conn.exec("DELETE FROM meos where id = #{id}")
+    conn.exec("DELETE FROM memos where id = #{id}")
     conn.close
     true
   end
