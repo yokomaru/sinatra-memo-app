@@ -52,9 +52,9 @@ get '/memos/:id/edit' do |id|
 end
 
 patch '/memos/:id' do |id|
-  memo = Memo.find_by_id(id)
+  @memo = Memo.find_by_id(id)
 
-  redirect to not_found if memo.nil?
+  redirect to not_found if @memo.nil?
   if Memo.update(params)
     redirect "/memos/#{id}"
   else
