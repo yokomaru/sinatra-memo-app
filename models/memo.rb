@@ -7,24 +7,17 @@ class Memo
   FILE_PATH = 'db/memo.json'
 
   def self.all
-    conn = set_connect
-    results = conn.exec("SELECT * FROM memos")
-    conn.close
-    results
+    conn.exec("SELECT * FROM memos")
   end
 
   def self.find_by_id(id)
-    conn = set_connect
     memo = conn.exec_params("SELECT * FROM memos where id = $1", [id]).to_a
     memo[0]
   end
 
   def self.create(params)
     begin
-      conn = set_connect
       conn.exec_params("INSERT INTO memos (title, content) VALUES ($1, $2)", [params[:content], params[:title]])
-      conn.close
-      true
     rescue PG::Error => err
       puts err
       false
@@ -33,10 +26,7 @@ class Memo
 
   def self.update(params)
     begin
-      conn = set_connect
-      conn.exec("UPDATE memos SET title = $1, content = $2 where id = $3", [params[:title], params[:content], params[:id]])
-      conn.close
-      true
+      conn.exec_params("UPDATE memos SET title = $1, content = $2 where id = $3", [params[:title], params[:content], params[:id]])
     rescue PG::Error => err
       puts err
       false
@@ -45,10 +35,7 @@ class Memo
 
   def self.destroy(id)
     begin
-      conn = set_connect
-      conn.exec_params("DELETE FROM memos where id = $1", [id])
-      conn.close
-      true
+      result = conn.exec_params("DELETE FROM meos where id = $1", [id])
     rescue PG::Error => err
       puts err
       false
@@ -64,7 +51,8 @@ class Memo
   end
 
   private
-  def self.set_connect
-    PG.connect(dbname: 'postgres')
-  end
+    def self.conn
+      @con ||= PG.connect(dbname: 'postgres')
+    end
+
 end
