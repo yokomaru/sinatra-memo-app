@@ -11,35 +11,22 @@ class Memo
   end
 
   def self.find_by_id(id)
-    memo = conn.exec_params("SELECT * FROM memos where id = $1", [id]).to_a
-    memo[0]
+    conn.exec_params("SELECT * FROM memos where id = $1", [id]).to_a[0]
   end
 
   def self.create(params)
-    begin
-      conn.exec_params("INSERT INTO memos (title, content) VALUES ($1, $2)", [params[:content], params[:title]])
-    rescue PG::Error => err
-      puts err
-      false
-    end
+    result = conn.exec_params("INSERT INTO memos (title, content) VALUES ($1, $2)", [params[:content], params[:title]])
+    exec_result(result)
   end
 
   def self.update(params)
-    begin
-      conn.exec_params("UPDATE memos SET title = $1, content = $2 where id = $3", [params[:title], params[:content], params[:id]])
-    rescue PG::Error => err
-      puts err
-      false
-    end
+    result = conn.exec_params("UPDATE memos SET title = $1, content = $2 where id = $3", [params[:title], params[:content], params[:id]])
+    exec_result(result)
   end
 
   def self.destroy(id)
-    begin
-      result = conn.exec_params("DELETE FROM meos where id = $1", [id])
-    rescue PG::Error => err
-      puts err
-      false
-    end
+    result = conn.exec_params("DELETE FROM memos where id = $1", [id])
+    exec_result(result)
   end
 
   def self.create_db
@@ -53,6 +40,10 @@ class Memo
   private
     def self.conn
       @con ||= PG.connect(dbname: 'postgres')
+    end
+
+    def self.exec_result(result)
+      result.cmd_tuples == 1 ? true : false
     end
 
 end
