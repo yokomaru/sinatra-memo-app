@@ -29,14 +29,6 @@ class Memo
     exec_result(result)
   end
 
-  def self.create_db
-    return if File.exist?(FILE_PATH)
-
-    File.open(FILE_PATH, 'w') do |file|
-      JSON.dump([], file)
-    end
-  end
-
   private
     def self.conn
       if @con.nil?
@@ -50,7 +42,7 @@ class Memo
     end
 
     def self.exec_result(result)
-      result.cmd_tuples == 1 ? true : false
+      result.cmd_tuples == 1 ? true : false #SQL実行によって影響のあった行が１行ある場合trueを返す
     end
 
 end

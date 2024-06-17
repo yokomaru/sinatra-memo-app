@@ -3,6 +3,7 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require_relative 'models/memo'
+require_relative 'db/setup'
 
 enable :method_override
 
@@ -80,4 +81,4 @@ not_found do
   erb :not_found
 end
 
-Memo.create_db if $PROGRAM_NAME == __FILE__
+setup if $PROGRAM_NAME == __FILE__
