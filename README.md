@@ -49,7 +49,7 @@ $ brew services start postgresql
 $ brew services stop postgresql
 ```
 
-1. メモアプリを立ち上げてください(立ち上げと同時にDBとテーブル作成処理が走ります)。
+5. メモアプリを立ち上げてください(立ち上げと同時にDBとテーブル作成処理が走ります)。
 
 ```shell
 $ bundle exec ruby app.rb
