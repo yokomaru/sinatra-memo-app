@@ -40,7 +40,7 @@ class Memo
   private
     def self.conn
       if @con.nil?
-        @con = PG.connect(dbname: 'postgres')
+        @con = PG.connect(dbname: 'sinatra_memo_app')
         @con.prepare("select_where_id", "SELECT * FROM memos where id = $1")
         @con.prepare("create", "INSERT INTO memos (title, content) VALUES ($1, $2)")
         @con.prepare("destroy", "DELETE FROM memos where id = $1")
