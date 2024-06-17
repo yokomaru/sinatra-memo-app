@@ -4,8 +4,6 @@ require 'json'
 require 'pg'
 
 class Memo
-  FILE_PATH = 'db/memo.json'
-
   def self.all
     conn.exec('SELECT * FROM memos')
   end
