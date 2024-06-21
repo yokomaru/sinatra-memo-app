@@ -35,18 +35,19 @@ $ bundle install
 
 4. PostgreSQLを立ち上げてください。
 
-- 以下手順はMacOSかつbrewを利用した起動方法になります。
+- 以下手順はMacOSかつbrewを利用した方法になります。
 - インストールがまだの場合は[PostgreSQL: macOS packages](https://www.postgresql.org/download/macosx/)よりご確認ください。
 
-```shell
-$ brew services start postgresql
-```
+    - 起動
+    ```shell
+    $ brew services start postgresql
+    ```
 
-- 停止は以下
+    - 停止
 
-```shell
-$ brew services stop postgresql
-```
+    ```shell
+    $ brew services stop postgresql
+    ```
 
 5. メモアプリを立ち上げてください(立ち上げと同時にDBとテーブル作成処理が走ります)。
 
