@@ -5,7 +5,7 @@ require 'pg'
 class Memo
   class << self
     def all
-      connection.exec('SELECT id, title FROM memos ORDER BY id')
+      connection.exec('SELECT id, title FROM memos ORDER BY id ASC')
     end
 
     def find_by_id(id)
