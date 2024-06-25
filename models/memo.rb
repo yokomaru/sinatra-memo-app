@@ -5,7 +5,7 @@ require 'pg'
 class Memo
   class << self
     def all
-      connection.exec('SELECT * FROM memos')
+      connection.exec('SELECT id, title FROM memos ORDER BY id')
     end
 
     def find_by_id(id)
@@ -30,7 +30,7 @@ class Memo
     def connection
       if @connection.nil?
         @connection = PG.connect(dbname: 'sinatra_memo_app')
-        @connection.prepare('select_where_id', 'SELECT * FROM memos where id = $1')
+        @connection.prepare('select_where_id', 'SELECT id, title, content FROM memos where id = $1')
         @connection.prepare('create', 'INSERT INTO memos (title, content) VALUES ($1, $2)')
         @connection.prepare('destroy', 'DELETE FROM memos where id = $1')
         @connection.prepare('update', 'UPDATE memos SET title = $1, content = $2 where id = $3')
