@@ -1,63 +1,45 @@
 # frozen_string_literal: true
 
-require 'json'
+require 'pg'
 
 class Memo
-  FILE_PATH = 'db/memo.json'
-
-  def self.all
-    File.open(FILE_PATH, 'r') do |file|
-      content = file.read
-      content.empty? ? [] : JSON.parse(content)
+  class << self
+    def all
+      connection.exec('SELECT id, title FROM memos ORDER BY id ASC')
     end
-  end
 
-  def self.find_by_id(id)
-    memos = Memo.all
-    memos.find { |x| x['id'] == id }
-  end
-
-  def self.save(memos)
-    File.open(FILE_PATH, 'w') do |file|
-      JSON.dump(memos, file)
+    def find_by_id(id)
+      connection.exec_prepared('select_where_id', [id]).to_a[0]
     end
-  end
 
-  def self.create(params)
-    memos = Memo.all
-    max_id = Memo.fetch_max_id(memos)
-    memos << { 'id': max_id.to_s, 'title': params[:title], 'content': params[:content] }
-    Memo.save(memos)
-  end
+    def create(params)
+      result = connection.exec_prepared('create', [params[:content], params[:title]])
+      exec_result(result)
+    end
 
-  def self.update(params)
-    memos = Memo.all
-    memos.find do |memo|
-      if memo['id'] == params[:id]
-        memo['title'] = params[:title]
-        memo['content'] = params[:content]
+    def update(params)
+      result = connection.exec_prepared('update', [params[:title], params[:content], params[:id]])
+      exec_result(result)
+    end
+
+    def destroy(id)
+      result = connection.exec_prepared('destroy', [id])
+      exec_result(result)
+    end
+
+    def connection
+      if @connection.nil?
+        @connection = PG.connect(dbname: 'sinatra_memo_app')
+        @connection.prepare('select_where_id', 'SELECT id, title, content FROM memos where id = $1')
+        @connection.prepare('create', 'INSERT INTO memos (title, content) VALUES ($1, $2)')
+        @connection.prepare('destroy', 'DELETE FROM memos where id = $1')
+        @connection.prepare('update', 'UPDATE memos SET title = $1, content = $2 where id = $3')
       end
+      @connection
     end
-    Memo.save(memos)
-  end
 
-  def self.destroy(id)
-    memos = Memo.all
-    memos.find.with_index do |memo, i|
-      memos.delete_at(i) if memo['id'] == id
-    end
-    Memo.save(memos)
-  end
-
-  def self.fetch_max_id(memos)
-    memos.empty? ? 1 : memos.map { |memo| memo['id'].to_i }.max + 1
-  end
-
-  def self.create_db
-    return if File.exist?(FILE_PATH)
-
-    File.open(FILE_PATH, 'w') do |file|
-      JSON.dump([], file)
+    def exec_result(result)
+      result.cmd_tuples == 1 # SQL実行によって影響のあった行が１行ある場合trueを返す
     end
   end
 end

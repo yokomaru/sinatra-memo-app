@@ -33,13 +33,29 @@ $ cd sinatra-memo-app
 $ bundle install
 ```
 
-4. メモアプリを立ち上げてください。
+4. PostgreSQLを立ち上げてください。
+
+- 以下手順はMacOSかつbrewを利用した方法になります。
+- インストールがまだの場合は[PostgreSQL: macOS packages](https://www.postgresql.org/download/macosx/)よりご確認ください。
+
+    - 起動
+    ```shell
+    $ brew services start postgresql
+    ```
+
+    - 停止
+
+    ```shell
+    $ brew services stop postgresql
+    ```
+
+5. メモアプリを立ち上げてください(立ち上げと同時にDBとテーブル作成処理が走ります)。
 
 ```shell
 $ bundle exec ruby app.rb
 ```
 
-5. `http://localhost:4567` にアクセスしてください。
+6. `http://localhost:4567` にアクセスしてください。
 
 ## Usage
 ### 一覧
